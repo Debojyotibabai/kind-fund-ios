@@ -1,14 +1,14 @@
 import SwiftUI
 
-struct RadioButtonInput: View {
+struct CheckButtonInput: View {
     var isSelected: Bool
     var title: String
     var onSelected: () -> Void = {}
     
     var body: some View {
         HStack(alignment: .top) {
-            Image(systemName: isSelected ? "circle.circle.fill" : "circle")
-                .foregroundColor(.textInputPlaceholder)
+            Image(systemName: isSelected ? "checkmark.square.fill" : "square")
+                .foregroundColor(.textInputLabel)
                 .font(.system(size: 20))
             
             PrimarySubTitle(text: title)
@@ -20,5 +20,5 @@ struct RadioButtonInput: View {
 }
 
 #Preview {
-    RadioButtonInput(isSelected: false, title: "Hello world")
+    CheckButtonInput(isSelected: false, title: "Hello world")
 }

@@ -1,4 +1,4 @@
-enum StudentAgeType {
+enum StudentAgeTypeEnum {
     case youth, adult
     
     var title: String {

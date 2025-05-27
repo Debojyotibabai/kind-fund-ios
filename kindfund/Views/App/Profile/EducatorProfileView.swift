@@ -107,7 +107,7 @@ struct EducatorProfileView: View {
                     alignment: .topLeading
                 )
                 
-                EducaBottomTabBar()
+                EducatorBottomTabBar()
             }
         }
     }

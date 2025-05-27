@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SubmitPacketView: View {
+struct EditPacketView: View {
     @State var schoolName: String = ""
     @State var trackingNumber: String = ""
     @State var locationHours: String = ""
@@ -25,7 +25,7 @@ struct SubmitPacketView: View {
                     VStack(alignment: .leading) {
                         Spacer().frame(height: 20)
                         
-                        PrimaryTitle(text: "Submit a Packet")
+                        PrimaryTitle(text: "Edit Packet")
                         
                         Spacer().frame(height: 20)
                         
@@ -237,5 +237,5 @@ struct SubmitPacketView: View {
 }
 
 #Preview {
-    SubmitPacketView()
+    EditPacketView()
 }

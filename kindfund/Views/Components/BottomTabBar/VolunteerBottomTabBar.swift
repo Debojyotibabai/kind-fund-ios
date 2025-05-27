@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct EducatorBottomTabBar: View {
+struct VolunteerBottomTabBar: View {
     var body: some View {
         HStack {
-            ForEach(EducatorTabBarEnum.allCases, id: \.self) { item in
+            ForEach(VolunteerTabBarEnum.allCases, id: \.self) { item in
                 HStack {
                     Spacer()
                     Image(item.unFillIcon)
@@ -22,5 +22,5 @@ struct EducatorBottomTabBar: View {
 }
 
 #Preview {
-    EducatorBottomTabBar()
+    VolunteerBottomTabBar()
 }

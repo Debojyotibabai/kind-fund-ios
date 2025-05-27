@@ -64,7 +64,7 @@ struct SettingsView: View {
                     alignment: .topLeading
                 )
                 
-                EducaBottomTabBar()
+                EducatorBottomTabBar()
             }
         }
     }

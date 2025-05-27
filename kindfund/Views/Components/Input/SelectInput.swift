@@ -2,14 +2,17 @@ import SwiftUI
 
 struct SelectInput: View {
     @Binding var selectedOption: String
+    var options: [SelectInputModel] = []
     var backgroundColor: Color = .textInputBackground
     var width: CGFloat = .infinity
     
     var body: some View {
         Menu {
-            Button("Option 1", action: {})
-            Button("Option 2", action: {})
-            Button("Option 3", action: {})
+            ForEach(options) { option in
+                Button(option.label, action: {
+                    selectedOption = option.value
+                })
+            }
         } label: {
             HStack {
                 Text(selectedOption != "" ? selectedOption : "select")

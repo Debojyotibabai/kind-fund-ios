@@ -34,7 +34,7 @@ struct NotificationView: View {
                     alignment: .topLeading
                 )
                 
-                EducaBottomTabBar()
+                EducatorBottomTabBar()
             }
         }
     }

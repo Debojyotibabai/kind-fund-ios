@@ -55,7 +55,7 @@ struct EducatorPacketListingView: View {
                     alignment: .topLeading
                 )
                 
-                EducaBottomTabBar()
+                EducatorBottomTabBar()
             }
         }
     }
