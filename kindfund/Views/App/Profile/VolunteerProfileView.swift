@@ -1,14 +1,26 @@
 import SwiftUI
 
-struct EducatorProfileView: View {
+struct VolunteerProfileView: View {
     @State var name: String = "Jenny Smith"
-    @State var position: String = "4th Grade Teacher"
     @State var emailAddress: String = "jsmith@davisdistrict.org"
     @State var phoneNumber: String = "(801) 555 - 1234"
-    @State var schoolDistrict: String = "Davis"
-    @State var schoolName: String = "Endeavour Elementry"
+    @State var homeAddress: String = "123 N 1234 W, Highland, UT 84003"
     @State var schoolAddress: String = "1870 S 25 W, Kaysville, UT 84037"
     @State var schoolPhoneNumber: String = "(801) 402-0400"
+    @State var howManyKids: String = "Unlimited"
+    @State var howOftenShop: String = VolunteerTimingEnum.weekly.title
+    @State var schoolDistricts: String = [
+        "Davis County",
+        "Cache County",
+        "Summit County",
+        "Iron County",
+        "Weber County",
+        "Grand County",
+        "Box Elder County",
+        "Uintah County",
+        "Millard County",
+        "Sanpete County",
+    ].joined(separator: ", ")
     
     var body: some View {
         GeometryReader { geo in
@@ -23,59 +35,49 @@ struct EducatorProfileView: View {
                         
                         Spacer().frame(height: 30)
                         
-                        HStack(alignment: .top) {
-                            VStack(alignment: .leading) {
-                                PrimaryInputLabel(label: "Educator Name")
-                                
-                                UnderlineText(text: name)
-                            }
-                            
-                            VStack(alignment: .leading) {
-                                PrimaryInputLabel(label: "Educator Position")
-                                
-                                UnderlineText(text: position)
-                            }
-                        }
+                        PrimaryInputLabel(label: "Full Name")
+                        
+                        UnderlineText(text: name)
                         
                         Spacer().frame(height: 20)
                         
-                        PrimaryInputLabel(label: "Educator Email Address")
+                        PrimaryInputLabel(label: "Email Address")
                         
                         UnderlineText(text: emailAddress)
                         
                         Spacer().frame(height: 20)
                         
-                        PrimaryInputLabel(label: "Educator Phone Number")
+                        PrimaryInputLabel(label: "Phone Number")
                         
                         UnderlineText(text: phoneNumber)
                         
                         Spacer().frame(height: 20)
                         
-                        HStack(alignment: .top) {
-                            VStack(alignment: .leading) {
-                                PrimaryInputLabel(label: "School District")
-                                
-                                UnderlineText(text: schoolDistrict)
-                            }
-                            
-                            VStack(alignment: .leading) {
-                                PrimaryInputLabel(label: "School Name")
-                                
-                                UnderlineText(text: schoolName)
-                            }
-                        }
+                        PrimaryInputLabel(label: "Home Address")
+                        
+                        UnderlineText(text: homeAddress)
+                        
+                        Spacer().frame(height: 35)
+                        
+                        PrimaryTitle(text: "My Preferences")
+                        
+                        Spacer().frame(height: 30)
+                        
+                        PrimaryInputLabel(label: "How many kids do you shop for?")
+                        
+                        UnderlineText(text: howManyKids)
                         
                         Spacer().frame(height: 20)
                         
-                        PrimaryInputLabel(label: "School Address")
+                        PrimaryInputLabel(label: "How often can you shop?")
                         
-                        UnderlineText(text: schoolAddress)
+                        UnderlineText(text: howOftenShop)
                         
                         Spacer().frame(height: 20)
                         
-                        PrimaryInputLabel(label: "School Phone Number")
+                        PrimaryInputLabel(label: "School Districts")
                         
-                        UnderlineText(text: schoolPhoneNumber)
+                        UnderlineText(text: schoolDistricts)
                         
                         Spacer().frame(height: 40)
                         
@@ -99,12 +101,12 @@ struct EducatorProfileView: View {
                     alignment: .topLeading
                 )
                 
-                EducatorBottomTabBar()
+                VolunteerBottomTabBar()
             }
         }
     }
 }
 
 #Preview {
-    EducatorProfileView()
+    VolunteerProfileView()
 }

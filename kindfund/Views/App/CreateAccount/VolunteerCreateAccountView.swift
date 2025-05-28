@@ -19,7 +19,7 @@ struct VolunteerCreateAccountView: View {
     @State var volunteerAgreementSignature: String = ""
     @State var iAmA: String = ""
     @State var howManyKids: Int?
-    @State var schoolDistricts: [String] = []
+    @State var schoolDistricts: [SelectInputModel] = []
     @State var shopForWhichCountry: String = ""
     @State var affiliateName: String = ""
     @State var groupName: String = ""
@@ -32,6 +32,14 @@ struct VolunteerCreateAccountView: View {
         VolunteerIdentityModel(title: "Family member or friend of an employee"),
         VolunteerIdentityModel(title: "An employee of a KIND Fund Donor or Sponsor"),
         VolunteerIdentityModel(title: "Simply someone who wants to help"),
+    ]
+    
+    let schoolDistrictsData: [SelectInputModel] = [
+        SelectInputModel(label: "District 1", value: "1"),
+        SelectInputModel(label: "District 2", value: "2"),
+        SelectInputModel(label: "District 3", value: "3"),
+        SelectInputModel(label: "District 4", value: "4"),
+        SelectInputModel(label: "District 5", value: "5"),
     ]
     
     
@@ -246,6 +254,14 @@ struct VolunteerCreateAccountView: View {
                         }
                         
                         Spacer().frame(height: 15)
+                        
+                        PrimaryInputLabel(label: "Please select a school district")
+                        
+                        MultiSelectInput(selectedOption: $schoolDistricts,
+                                         options: schoolDistrictsData,
+                                         backgroundColor: .light)
+                        
+                        Spacer().frame(height: 20)
                         
                         PrimaryInputLabel(label: "Which county would you prefer to shop in?")
                         
