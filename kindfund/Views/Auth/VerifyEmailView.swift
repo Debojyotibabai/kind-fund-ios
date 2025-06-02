@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct VerifyEmailView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State var otp: [String] = Array(repeating: "", count: 6)
     @FocusState var focusedField: Int?
     
@@ -27,7 +29,11 @@ struct VerifyEmailView: View {
     var body: some View {
         GeometryReader { geo in
             VStack {
-                OnlyBackHeader()
+                OnlyBackHeader(
+                    onBack: {
+                        authViewModel.authNavigationPath.removeLast()
+                    }
+                )
                 
                 VStack(alignment: .leading) {
                     LargeTitle(label: "Verify Your Email",
@@ -56,13 +62,20 @@ struct VerifyEmailView: View {
                         
                         Spacer()
                         
-                        SolidButton(title: "VERIFY", width: geo.size.width * 0.55)
+                        SolidButton(title: "VERIFY",
+                                    width: geo.size.width * 0.55,
+                                    onPress: {
+                            authViewModel.authNavigationPath.removeLast(2)
+                        })
                         
                         Spacer().frame(height: 25)
                         
                         Text("Change Email?")
                             .font(.custom(Fonts.medium, size: 16))
                             .foregroundStyle(.primaryBackground)
+                            .onTapGesture {
+                                authViewModel.authNavigationPath.removeLast()
+                            }
                     }
                     .frame(minWidth: 0,
                            maxWidth: geo.size.width,
@@ -83,4 +96,5 @@ struct VerifyEmailView: View {
 
 #Preview {
     VerifyEmailView()
+        .environmentObject(AuthViewModel())
 }

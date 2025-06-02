@@ -1,12 +1,18 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State var emailAddress: String = ""
     
     var body: some View {
         GeometryReader { geo in
             VStack {
-                OnlyBackHeader()
+                OnlyBackHeader(
+                    onBack: {
+                        authViewModel.authNavigationPath.removeLast()
+                    }
+                )
                 
                 VStack(alignment: .leading) {
                     LargeTitle(label: "Forgot Your Password?",
@@ -24,7 +30,11 @@ struct ForgotPasswordView: View {
                         
                         Spacer()
                         
-                        SolidButton(title: "SEND CODE", width: geo.size.width * 0.55)
+                        SolidButton(title: "SEND CODE",
+                                    width: geo.size.width * 0.55,
+                                    onPress: {
+                            authViewModel.authNavigationPath.append(.createNewPassword)
+                        })
                     }
                     .frame(minWidth: 0,
                            maxWidth: geo.size.width,
@@ -45,4 +55,5 @@ struct ForgotPasswordView: View {
 
 #Preview {
     ForgotPasswordView()
+        .environmentObject(AuthViewModel())
 }

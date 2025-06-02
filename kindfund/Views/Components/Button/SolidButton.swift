@@ -6,11 +6,11 @@ struct SolidButton: View {
     var foregroundColor: Color = .light
     let width: CGFloat
     var height: CGFloat = 40
-    let action: () -> Void = {}
+    var onPress: () -> Void = {}
     
     var body: some View {
         Button {
-            action()
+            onPress()
         } label: {
             Text(title)
                 .font(.custom(Fonts.semiBold, size: 16))

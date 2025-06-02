@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct EducatorSignupView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var emailAddress: String = ""
@@ -32,6 +34,10 @@ struct EducatorSignupView: View {
                                 .font(.custom(Fonts.medium, size: 15))
                                 .foregroundStyle(.secondaryBackground))
                             .multilineTextAlignment(.center)
+                            .onTapGesture {
+                                authViewModel.authNavigationPath = []
+                            }
+                            
                             Spacer()
                         }
                         
@@ -76,6 +82,9 @@ struct EducatorSignupView: View {
                         Spacer()
                         SolidButton(title: "Sign Up",
                                     width: geo.size.width * 0.4,
+                                    onPress: {
+                            authViewModel.authNavigationPath.append(.verifyEmail)
+                        }
                         )
                         Spacer()
                     }
@@ -90,6 +99,10 @@ struct EducatorSignupView: View {
                             .font(.custom(Fonts.medium, size: 15))
                             .foregroundStyle(.primaryBackground))
                         .multilineTextAlignment(.center)
+                        .onTapGesture {
+                            authViewModel.authNavigationPath.removeLast()
+                        }
+                        
                         Spacer()
                     }
                     
@@ -113,4 +126,5 @@ struct EducatorSignupView: View {
 
 #Preview {
     EducatorSignupView()
+        .environmentObject(AuthViewModel())
 }

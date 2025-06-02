@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct VolunteerLoginView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State var emailAddress: String = ""
     @State var password: String = ""
     
@@ -23,7 +25,8 @@ struct VolunteerLoginView: View {
                     }
                     
                     ScrollView {
-                        VStack(alignment: .leading) {PrimaryInputLabel(label: "Email Address")
+                        VStack(alignment: .leading) {
+                            PrimaryInputLabel(label: "Email Address")
                             
                             TextInput(text: $emailAddress,
                                       placeholder: "email@example.com")
@@ -34,6 +37,19 @@ struct VolunteerLoginView: View {
                             
                             TextInput(text: $password,
                                       placeholder: "password")
+                            
+                            Spacer().frame(height: 15)
+                            
+                            HStack {
+                                Spacer()
+                                
+                                Text("Forgot password?")
+                                    .font(.custom(Fonts.medium, size: 15))
+                                    .foregroundStyle(.primaryBackground)
+                                    .onTapGesture {
+                                        authViewModel.authNavigationPath.append(.forgotPassword)
+                                    }
+                            }
                         }
                     }
                     
@@ -55,6 +71,10 @@ struct VolunteerLoginView: View {
                             .font(.custom(Fonts.medium, size: 15))
                             .foregroundStyle(.primaryBackground))
                         .multilineTextAlignment(.center)
+                        .onTapGesture {
+                            authViewModel.authNavigationPath.append(.volunteerSignup)
+                        }
+                        
                         Spacer()
                     }
                     
@@ -78,4 +98,5 @@ struct VolunteerLoginView: View {
 
 #Preview {
     VolunteerLoginView()
+        .environmentObject(AuthViewModel())
 }

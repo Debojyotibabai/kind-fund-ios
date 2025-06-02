@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct CreateNewPasswordView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State var otp: [String] = Array(repeating: "", count: 6)
     @FocusState var focusedField: Int?
     
@@ -30,7 +32,11 @@ struct CreateNewPasswordView: View {
     var body: some View {
         GeometryReader { geo in
             VStack {
-                OnlyBackHeader()
+                OnlyBackHeader(
+                    onBack: {
+                        authViewModel.authNavigationPath.removeLast()
+                    }
+                )
                 
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading) {
@@ -93,7 +99,11 @@ struct CreateNewPasswordView: View {
                 Spacer().frame(height: 10)
                 HStack {
                     Spacer()
-                    SolidButton(title: "CONFIRM", width: geo.size.width * 0.55)
+                    SolidButton(title: "CONFIRM",
+                                width: geo.size.width * 0.55,
+                                onPress: {
+                        authViewModel.authNavigationPath.removeLast(2)
+                    })
                     Spacer()
                 }
             }
@@ -103,4 +113,5 @@ struct CreateNewPasswordView: View {
 
 #Preview {
     CreateNewPasswordView()
+        .environmentObject(AuthViewModel())
 }
