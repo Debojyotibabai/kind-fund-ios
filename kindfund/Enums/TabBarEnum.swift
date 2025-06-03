@@ -1,27 +1,38 @@
 import SwiftUI
 
 enum EducatorTabBarEnum: CaseIterable {
-    case packet, submitPacket, notification
+    case packetStack, submitPacketStack, notificationStack
     
     var unFillIcon: ImageResource {
         switch self {
-        case .packet:
+        case .packetStack:
             return .packetUnfill
-        case .submitPacket:
+        case .submitPacketStack:
             return .submitPacketUnfill
-        case .notification:
+        case .notificationStack:
             return .notificationUnfill
         }
     }
     
     var fillIcon: ImageResource {
         switch self {
-        case .packet:
+        case .packetStack:
             return .packetFill
-        case .submitPacket:
+        case .submitPacketStack:
             return .submitPacketFill
-        case .notification:
+        case .notificationStack:
             return .notificationFill
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .packetStack:
+            return "Packets"
+        case .submitPacketStack:
+            return "Submit a Request"
+        case .notificationStack:
+            return "Notifications"
         }
     }
 }

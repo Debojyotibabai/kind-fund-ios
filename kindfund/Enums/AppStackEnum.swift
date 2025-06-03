@@ -1,7 +1,7 @@
 import SwiftUI
 
-enum EducatorAppStacks: Int, CaseIterable {
-    case profileStack, packetStack, submitRequestStack, notificationStack, settingsStack, logoutStack
+enum EducatorAppStacksEnum: Int, CaseIterable {
+    case profileStack, packetStack, submitPacketStack, notificationStack, settingsStack
     
     var title: String {
         switch self {
@@ -9,14 +9,12 @@ enum EducatorAppStacks: Int, CaseIterable {
             return "Profile"
         case .packetStack:
             return "Packets"
-        case .submitRequestStack:
+        case .submitPacketStack:
             return "Submit a Request"
         case .notificationStack:
             return "Notifications"
         case .settingsStack:
             return "Settings"
-        case .logoutStack:
-            return "Logout"
         }
     }
     
@@ -26,19 +24,31 @@ enum EducatorAppStacks: Int, CaseIterable {
             return .profileDrawer
         case .packetStack:
             return .packetDrawer
-        case .submitRequestStack:
+        case .submitPacketStack:
             return .submitPacketDrawer
         case .notificationStack:
             return .notificationDrawer
         case .settingsStack:
             return .settingsDrawer
-        case .logoutStack:
-            return .logoutDrawer
         }
     }
 }
 
-enum VolunteerAppStacks: Int, CaseIterable {
+enum EducatorProfileStackScreensEnum: Hashable {
+    case editProfile
+}
+
+enum EducatorPacketStackScreensEnum: Hashable {
+    case packetDetails, editPacket
+}
+
+enum EducatorSubmitPacketStackScreensEnum: Hashable {}
+
+enum EducatorNotificationStackScreensEnum: Hashable {}
+
+enum EducatorSettingsStackScreensEnum: Hashable {}
+
+enum VolunteerAppStacksEnum: Int, CaseIterable {
     case profileStack, myPacketStack, notificationStack, settingsStack, logoutStack
     
     var title: String {

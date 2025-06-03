@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct NotificationView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -15,6 +17,12 @@ struct NotificationView: View {
                         LazyVStack(alignment: .leading) {
                             ForEach(0..<10) { index in
                                 NotificationCard()
+                                    .onTapGesture {
+                                        appViewModel.educatorCurrentStack = .packetStack
+                                        
+                                        appViewModel.educatorPacketStackNavigationPath = []
+                                        appViewModel.educatorPacketStackNavigationPath.append(.packetDetails)
+                                    }
                             }
                         }
                         .frame(minWidth: 0,
@@ -42,4 +50,5 @@ struct NotificationView: View {
 
 #Preview {
     NotificationView()
+        .environmentObject(AppViewModel())
 }

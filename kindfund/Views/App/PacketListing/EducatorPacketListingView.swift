@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct EducatorPacketListingView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     @State var searchText: String = ""
     
     var body: some View {
@@ -31,6 +33,9 @@ struct EducatorPacketListingView: View {
                             
                             ForEach(0..<5) { _ in
                                 PacketCard()
+                                    .onTapGesture {
+                                        appViewModel.educatorPacketStackNavigationPath.append(.packetDetails)
+                                    }
                             }
                             
                             Spacer().frame(height: 30)
@@ -42,6 +47,9 @@ struct EducatorPacketListingView: View {
                             
                             ForEach(0..<5) { _ in
                                 PacketCard()
+                                    .onTapGesture {
+                                        appViewModel.educatorPacketStackNavigationPath.append(.packetDetails)
+                                    }
                             }
                             
                             Spacer().frame(height: 20)
@@ -63,4 +71,5 @@ struct EducatorPacketListingView: View {
 
 #Preview {
     EducatorPacketListingView()
+        .environmentObject(AppViewModel())
 }

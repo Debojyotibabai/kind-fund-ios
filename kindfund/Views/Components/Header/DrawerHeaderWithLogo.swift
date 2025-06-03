@@ -1,12 +1,17 @@
 import SwiftUI
 
 struct DrawerHeaderWithLogo: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     var body: some View {
         ZStack {
             HStack {
                 Image(systemName: "line.3.horizontal")
                     .foregroundColor(.darkBackgroundPrimary)
                     .font(.system(size: 30, weight: .medium))
+                    .onTapGesture {
+                        appViewModel.openDrawer()
+                    }
                 
                 Spacer()
             }
@@ -23,4 +28,5 @@ struct DrawerHeaderWithLogo: View {
 
 #Preview {
     DrawerHeaderWithLogo()
+        .environmentObject(AppViewModel())
 }

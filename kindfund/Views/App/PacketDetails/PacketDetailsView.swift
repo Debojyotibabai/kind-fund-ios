@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct PacketDetailsView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     var body: some View {
         GeometryReader { geo in
             VStack {
@@ -14,6 +16,9 @@ struct PacketDetailsView: View {
                             HStack {
                                 Image(systemName: "chevron.left")
                                     .font(.system(size: 22, weight: .medium))
+                                    .onTapGesture {
+                                        appViewModel.educatorPacketStackNavigationPath.removeLast()
+                                    }
                                 
                                 Spacer().frame(width: 15)
                                 
@@ -53,9 +58,11 @@ struct PacketDetailsView: View {
                 EducatorBottomTabBar()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
     PacketDetailsView()
+        .environmentObject(AppViewModel())
 }

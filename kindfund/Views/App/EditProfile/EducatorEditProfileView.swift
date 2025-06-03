@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct EducatorEditProfileView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var position: String = ""
@@ -125,7 +127,10 @@ struct EducatorEditProfileView: View {
                             Spacer()
                             
                             SolidButton(title: "Done",
-                                        width: geo.size.width * 0.4)
+                                        width: geo.size.width * 0.4,
+                                        onPress: {
+                                appViewModel.educatorProfileStackNavigationPath.removeLast()
+                            })
                         }
                         
                         Spacer().frame(height: 20)
@@ -141,9 +146,11 @@ struct EducatorEditProfileView: View {
                 EducatorBottomTabBar()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
     EducatorEditProfileView()
+        .environmentObject(AppViewModel())
 }

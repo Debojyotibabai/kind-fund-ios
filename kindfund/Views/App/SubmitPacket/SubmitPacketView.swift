@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SubmitPacketView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     @State var schoolName: String = ""
     @State var trackingNumber: String = ""
     @State var locationHours: String = ""
@@ -238,4 +240,5 @@ struct SubmitPacketView: View {
 
 #Preview {
     SubmitPacketView()
+        .environmentObject(AppViewModel())
 }

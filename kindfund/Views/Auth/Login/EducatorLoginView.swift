@@ -82,7 +82,7 @@ struct EducatorLoginView: View {
                 }
                 .padding(20)
                 .frame(width: geo.size.width * 0.9,
-                       height: geo.size.height * 0.6,
+                       height: geo.size.height * 0.65,
                        alignment: .topLeading)
                 .background(.light)
             }

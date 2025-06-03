@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct EducatorProfileView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     @State var name: String = "Jenny Smith"
     @State var position: String = "4th Grade Teacher"
     @State var emailAddress: String = "jsmith@davisdistrict.org"
@@ -81,7 +83,10 @@ struct EducatorProfileView: View {
                         
                         HStack {
                             SolidButton(title: "Edit Profile",
-                                        width: geo.size.width * 0.45)
+                                        width: geo.size.width * 0.45,
+                                        onPress: {
+                                appViewModel.educatorProfileStackNavigationPath.append(.editProfile)
+                            })
                             
                             Spacer()
                             
@@ -107,4 +112,5 @@ struct EducatorProfileView: View {
 
 #Preview {
     EducatorProfileView()
+        .environmentObject(AppViewModel())
 }

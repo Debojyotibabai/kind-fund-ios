@@ -7,6 +7,9 @@ struct RequestedItemsModel: Identifiable {
 }
 
 struct PacketInformations: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State var requestedItems: [RequestedItemsModel] = [
         RequestedItemsModel(name: "Shirt", isChecked: false),
         RequestedItemsModel(name: "Pants", isChecked: false),
@@ -121,7 +124,13 @@ struct PacketInformations: View {
                 
                 Spacer().frame(height: 15)
                 
-                SolidButton(title: "Edit Request", width: 160)
+                if(authViewModel.userType == .educator) {
+                    SolidButton(title: "Edit Request",
+                                width: 160,
+                                onPress: {
+                        appViewModel.educatorPacketStackNavigationPath.append(.editPacket)
+                    })
+                }
             }
             .frame(minWidth: 0,
                    maxWidth: .infinity,
@@ -137,4 +146,6 @@ struct PacketInformations: View {
 
 #Preview {
     PacketInformations()
+        .environmentObject(AppViewModel())
+        .environmentObject(AuthViewModel())
 }

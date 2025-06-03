@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     let settings: [String] = [
         "Payout Information",
         "Terms and Conditions",
@@ -16,10 +18,10 @@ struct SettingsView: View {
                 
                 VStack(alignment: .leading) {
                     HStack {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 22, weight: .medium))
-                        
-                        Spacer().frame(width: 15)
+                        //                        Image(systemName: "chevron.left")
+                        //                            .font(.system(size: 22, weight: .medium))
+                        //
+                        //                        Spacer().frame(width: 15)
                         
                         PrimaryTitle(text: "Settings")
                     }
@@ -72,4 +74,5 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
+        .environmentObject(AppViewModel())
 }

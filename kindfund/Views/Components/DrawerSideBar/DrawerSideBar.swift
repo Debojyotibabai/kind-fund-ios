@@ -1,12 +1,17 @@
 import SwiftUI
 
 struct DrawerSideBar: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     var body: some View {
         ZStack(alignment: .leading) {
             Rectangle()
                 .ignoresSafeArea()
                 .foregroundStyle(.black.opacity(0.5))
-                .onTapGesture {}
+                .onTapGesture {
+                    appViewModel.closeDrawer()
+                }
             
             VStack {
                 Spacer().frame(height: 25)
@@ -15,6 +20,7 @@ struct DrawerSideBar: View {
                     Spacer()
                     
                     Button {
+                        appViewModel.closeDrawer()
                     } label: {
                         Image(systemName: "xmark")
                             .resizable()
@@ -30,8 +36,10 @@ struct DrawerSideBar: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    ForEach(EducatorAppStacks.allCases, id: \.self.rawValue) { item in
+                    ForEach(EducatorAppStacksEnum.allCases, id: \.self.rawValue) { item in
                         Button {
+                            appViewModel.educatorCurrentStack = item
+                            appViewModel.closeDrawer()
                         } label: {
                             HStack(spacing: 15) {
                                 Image(item.icon)
@@ -47,6 +55,23 @@ struct DrawerSideBar: View {
                             .padding()
                         }
                     }
+                    
+                    Button {
+                        
+                    } label: {
+                        HStack(spacing: 15) {
+                            Image(.logoutDrawer)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 25, height: 25)
+                                .foregroundStyle(.light)
+                            
+                            Text("Logout")
+                                .font(.system(size: 20, weight: .medium))
+                                .foregroundStyle(.light)
+                        }
+                        .padding()
+                    }
                 }
                 
                 Spacer()
@@ -59,4 +84,6 @@ struct DrawerSideBar: View {
 
 #Preview {
     DrawerSideBar()
+        .environmentObject(AppViewModel())
+        .environmentObject(AuthViewModel())
 }

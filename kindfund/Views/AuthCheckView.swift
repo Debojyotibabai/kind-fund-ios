@@ -9,7 +9,13 @@ struct AuthCheckView: View {
             UserSelectionView()
                 .environmentObject(authViewModel)
                 .environmentObject(appViewModel)
-        } else {
+        } else if(authViewModel.isLoggedIn &&
+                  authViewModel.userType == .educator) {
+            EducatorAppMainStack()
+                .environmentObject(authViewModel)
+                .environmentObject(appViewModel)
+        } else if (authViewModel.isLoggedIn &&
+                   authViewModel.userType == .volunteer) {
             
         }
     }

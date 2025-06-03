@@ -77,10 +77,8 @@ struct UserSelectionView: View {
                 switch screen {
                 case .educatorLogin:
                     EducatorLoginView()
-                        .navigationBarBackButtonHidden()
                 case .volunteerLogin:
                     VolunteerLoginView()
-                        .navigationBarBackButtonHidden()
                 case .educatorSignup:
                     EducatorSignupView()
                         .navigationBarBackButtonHidden()

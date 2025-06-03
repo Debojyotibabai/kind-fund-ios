@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct EditPacketView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     @State var schoolName: String = ""
     @State var trackingNumber: String = ""
     @State var locationHours: String = ""
@@ -217,7 +219,10 @@ struct EditPacketView: View {
                         HStack {
                             Spacer()
                             SolidButton(title: "Send Form",
-                                        width: geo.size.width * 0.4)
+                                        width: geo.size.width * 0.4,
+                                        onPress: {
+                                appViewModel.educatorPacketStackNavigationPath.removeLast()
+                            })
                         }
                         
                         Spacer().frame(height: 20)
@@ -233,9 +238,11 @@ struct EditPacketView: View {
                 EducatorBottomTabBar()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
     EditPacketView()
+        .environmentObject(AppViewModel())
 }
