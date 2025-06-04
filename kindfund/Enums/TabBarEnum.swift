@@ -39,27 +39,38 @@ enum EducatorTabBarEnum: CaseIterable {
 
 
 enum VolunteerTabBarEnum: CaseIterable {
-    case packet, profile, notification
+    case packetStack, profileStack, notificationStack
     
     var unFillIcon: ImageResource {
         switch self {
-        case .packet:
+        case .packetStack:
             return .packetUnfill
-        case .profile:
+        case .profileStack:
             return .profileUnfill
-        case .notification:
+        case .notificationStack:
             return .notificationUnfill
         }
     }
     
     var fillIcon: ImageResource {
         switch self {
-        case .packet:
+        case .packetStack:
             return .packetFill
-        case .profile:
+        case .profileStack:
             return .profileFill
-        case .notification:
+        case .notificationStack:
             return .notificationFill
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .packetStack:
+            return "My Packets"
+        case .profileStack:
+            return "Profile/Preferences"
+        case .notificationStack:
+            return "Notifications"
         }
     }
 }

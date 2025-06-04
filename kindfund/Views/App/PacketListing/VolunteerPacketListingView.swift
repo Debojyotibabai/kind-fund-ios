@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct VolunteerPacketListingView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     @State var isAvailable: Bool = true
     
     var body: some View {
@@ -61,6 +63,9 @@ struct VolunteerPacketListingView: View {
                             
                             ForEach(0..<5) { _ in
                                 PacketCard()
+                                    .onTapGesture {
+                                        appViewModel.volunteerPacketStackNavigationPath.append(.packetDetails)
+                                    }
                             }
                             
                             Spacer().frame(height: 30)
@@ -93,4 +98,5 @@ struct VolunteerPacketListingView: View {
 
 #Preview {
     VolunteerPacketListingView()
+        .environmentObject(AppViewModel())
 }

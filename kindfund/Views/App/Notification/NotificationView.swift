@@ -2,6 +2,7 @@ import SwiftUI
 
 struct NotificationView: View {
     @EnvironmentObject var appViewModel: AppViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         GeometryReader { geo in
@@ -18,10 +19,17 @@ struct NotificationView: View {
                             ForEach(0..<10) { index in
                                 NotificationCard()
                                     .onTapGesture {
-                                        appViewModel.educatorCurrentStack = .packetStack
-                                        
-                                        appViewModel.educatorPacketStackNavigationPath = []
-                                        appViewModel.educatorPacketStackNavigationPath.append(.packetDetails)
+                                        if(authViewModel.userType == .educator) {
+                                            appViewModel.educatorCurrentStack = .packetStack
+                                            
+                                            appViewModel.educatorPacketStackNavigationPath = []
+                                            appViewModel.educatorPacketStackNavigationPath.append(.packetDetails)
+                                        } else {
+                                            appViewModel.volunteerCurrentStack = .packetStack
+                                            
+                                            appViewModel.volunteerPacketStackNavigationPath = []
+                                            appViewModel.volunteerPacketStackNavigationPath.append(.packetDetails)
+                                        }
                                     }
                             }
                         }
@@ -42,7 +50,11 @@ struct NotificationView: View {
                     alignment: .topLeading
                 )
                 
-                EducatorBottomTabBar()
+                if (authViewModel.userType == .educator) {
+                    EducatorBottomTabBar()
+                } else {
+                    VolunteerBottomTabBar()
+                }
             }
         }
     }
@@ -51,4 +63,5 @@ struct NotificationView: View {
 #Preview {
     NotificationView()
         .environmentObject(AppViewModel())
+        .environmentObject(AuthViewModel())
 }

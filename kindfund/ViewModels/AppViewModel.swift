@@ -9,6 +9,13 @@ class AppViewModel: ObservableObject {
     @Published var educatorNotificationStackNavigationPath: [EducatorNotificationStackScreensEnum] = []
     @Published var educatorSettingsStackNavigationPath: [EducatorSettingsStackScreensEnum] = []
     
+    @Published var volunteerCurrentStack: VolunteerAppStacksEnum = .packetStack
+    
+    @Published var volunteerProfileStackNavigationPath: [VolunteerProfileStackScreensEnum] = []
+    @Published var volunteerPacketStackNavigationPath: [VolunteerPacketStackScreensEnum] = []
+    @Published var volunteerNotificationStackNavigationPath: [VolunteerNotificationStackScreensEnum] = []
+    @Published var volunteerSettingsStackNavigationPath: [VolunteerSettingsStackScreensEnum] = []
+    
     @Published var isDrawerOpened: Bool = false
     
     func openDrawer() {

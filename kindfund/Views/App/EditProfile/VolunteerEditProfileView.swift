@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct VolunteerEditProfileView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     @State var firstName: String = ""
     @State var lastName: String = ""
     @State var emailAddress: String = ""
@@ -293,7 +295,10 @@ struct VolunteerEditProfileView: View {
                             Spacer()
                             
                             SolidButton(title: "Done",
-                                        width: geo.size.width * 0.4)
+                                        width: geo.size.width * 0.4,
+                                        onPress: {
+                                appViewModel.volunteerProfileStackNavigationPath.removeLast()
+                            })
                         }
                         
                         Spacer().frame(height: 20)
@@ -309,9 +314,11 @@ struct VolunteerEditProfileView: View {
                 VolunteerBottomTabBar()
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
     VolunteerEditProfileView()
+        .environmentObject(AppViewModel())
 }

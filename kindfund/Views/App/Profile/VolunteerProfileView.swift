@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct VolunteerProfileView: View {
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     @State var name: String = "Jenny Smith"
     @State var emailAddress: String = "jsmith@davisdistrict.org"
     @State var phoneNumber: String = "(801) 555 - 1234"
@@ -83,7 +85,10 @@ struct VolunteerProfileView: View {
                         
                         HStack {
                             SolidButton(title: "Edit Profile",
-                                        width: geo.size.width * 0.45)
+                                        width: geo.size.width * 0.45,
+                                        onPress: {
+                                appViewModel.volunteerProfileStackNavigationPath.append(.editProfile)
+                            })
                             
                             Spacer()
                             
@@ -109,4 +114,5 @@ struct VolunteerProfileView: View {
 
 #Preview {
     VolunteerProfileView()
+        .environmentObject(AppViewModel())
 }

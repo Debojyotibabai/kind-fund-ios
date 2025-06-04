@@ -16,7 +16,9 @@ struct AuthCheckView: View {
                 .environmentObject(appViewModel)
         } else if (authViewModel.isLoggedIn &&
                    authViewModel.userType == .volunteer) {
-            
+            VolunteerMainAppStack()
+                .environmentObject(authViewModel)
+                .environmentObject(appViewModel)
         }
     }
 }

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PacketDetailsView: View {
     @EnvironmentObject var appViewModel: AppViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     var body: some View {
         GeometryReader { geo in
@@ -17,7 +18,11 @@ struct PacketDetailsView: View {
                                 Image(systemName: "chevron.left")
                                     .font(.system(size: 22, weight: .medium))
                                     .onTapGesture {
-                                        appViewModel.educatorPacketStackNavigationPath.removeLast()
+                                        if(authViewModel.userType == .educator) {
+                                            appViewModel.educatorPacketStackNavigationPath.removeLast()
+                                        } else {
+                                            appViewModel.volunteerPacketStackNavigationPath.removeLast()
+                                        }
                                     }
                                 
                                 Spacer().frame(width: 15)
@@ -27,19 +32,23 @@ struct PacketDetailsView: View {
                             
                             Spacer()
                             
-                            HStack {
-                                (Text("Status:")
-                                    .font(.custom(Fonts.medium, size: 15))
-                                    .foregroundStyle(.textInputLabel) + Text(" delivered to school office".uppercased())
-                                    .font(.custom(Fonts.medium, size: 14))
-                                    .foregroundStyle(.primaryBackground))
-                                .multilineTextAlignment(.leading)
+                            if (authViewModel.userType == .educator) {
+                                HStack {
+                                    (Text("Status:")
+                                        .font(.custom(Fonts.medium, size: 15))
+                                        .foregroundStyle(.textInputLabel) + Text(" delivered to school office".uppercased())
+                                        .font(.custom(Fonts.medium, size: 14))
+                                        .foregroundStyle(.primaryBackground))
+                                    .multilineTextAlignment(.leading)
+                                }
                             }
                         }
                         
                         Spacer().frame(height: 25)
                         
-                        PacketStatusChanger()
+                        if (authViewModel.userType == .volunteer) {
+                            PacketStatusChanger()
+                        }
                         
                         Spacer().frame(height: 25)
                         
@@ -55,7 +64,11 @@ struct PacketDetailsView: View {
                     alignment: .topLeading
                 )
                 
-                EducatorBottomTabBar()
+                if (authViewModel.userType == .educator) {
+                    EducatorBottomTabBar()
+                } else {
+                    VolunteerBottomTabBar()
+                }
             }
         }
         .navigationBarBackButtonHidden()
@@ -65,4 +78,5 @@ struct PacketDetailsView: View {
 #Preview {
     PacketDetailsView()
         .environmentObject(AppViewModel())
+        .environmentObject(AuthViewModel())
 }

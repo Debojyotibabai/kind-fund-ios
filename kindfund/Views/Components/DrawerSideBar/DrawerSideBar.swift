@@ -36,28 +36,49 @@ struct DrawerSideBar: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    ForEach(EducatorAppStacksEnum.allCases, id: \.self.rawValue) { item in
-                        Button {
-                            appViewModel.educatorCurrentStack = item
-                            appViewModel.closeDrawer()
-                        } label: {
-                            HStack(spacing: 15) {
-                                Image(item.icon)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundStyle(.light)
-                                
-                                Text(item.title)
-                                    .font(.system(size: 20, weight: .medium))
-                                    .foregroundStyle(.light)
+                    if authViewModel.userType == .educator {
+                        ForEach(EducatorAppStacksEnum.allCases, id: \.self.rawValue) { item in
+                            Button {
+                                appViewModel.educatorCurrentStack = item
+                                appViewModel.closeDrawer()
+                            } label: {
+                                HStack(spacing: 15) {
+                                    Image(item.icon)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 25, height: 25)
+                                        .foregroundStyle(.light)
+                                    
+                                    Text(item.title)
+                                        .font(.system(size: 20, weight: .medium))
+                                        .foregroundStyle(.light)
+                                }
+                                .padding()
                             }
-                            .padding()
+                        }
+                    } else {
+                        ForEach(VolunteerAppStacksEnum.allCases, id: \.self.rawValue) { item in
+                            Button {
+                                appViewModel.volunteerCurrentStack = item
+                                appViewModel.closeDrawer()
+                            } label: {
+                                HStack(spacing: 15) {
+                                    Image(item.icon)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 25, height: 25)
+                                        .foregroundStyle(.light)
+                                    
+                                    Text(item.title)
+                                        .font(.system(size: 20, weight: .medium))
+                                        .foregroundStyle(.light)
+                                }
+                                .padding()
+                            }
                         }
                     }
                     
                     Button {
-                        
                     } label: {
                         HStack(spacing: 15) {
                             Image(.logoutDrawer)
@@ -73,6 +94,7 @@ struct DrawerSideBar: View {
                         .padding()
                     }
                 }
+                
                 
                 Spacer()
             }

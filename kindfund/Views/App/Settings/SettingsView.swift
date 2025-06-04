@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var appViewModel: AppViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     let settings: [String] = [
         "Payout Information",
@@ -66,7 +67,11 @@ struct SettingsView: View {
                     alignment: .topLeading
                 )
                 
-                EducatorBottomTabBar()
+                if (authViewModel.userType == .educator) {
+                    EducatorBottomTabBar()
+                } else {
+                    VolunteerBottomTabBar()
+                }
             }
         }
     }
@@ -75,4 +80,5 @@ struct SettingsView: View {
 #Preview {
     SettingsView()
         .environmentObject(AppViewModel())
+        .environmentObject(AuthViewModel())
 }

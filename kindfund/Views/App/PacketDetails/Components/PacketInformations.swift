@@ -119,22 +119,24 @@ struct PacketInformations: View {
             
             Spacer().frame(height: 30)
             
-            VStack {
-                SolidButton(title: "Mark as Child Recieved", width: 250)
-                
-                Spacer().frame(height: 15)
-                
-                if(authViewModel.userType == .educator) {
-                    SolidButton(title: "Edit Request",
-                                width: 160,
-                                onPress: {
-                        appViewModel.educatorPacketStackNavigationPath.append(.editPacket)
-                    })
+            if(authViewModel.userType == .educator) {
+                VStack {
+                    SolidButton(title: "Mark as Child Recieved", width: 250)
+                    
+                    Spacer().frame(height: 15)
+                    
+                    if(authViewModel.userType == .educator) {
+                        SolidButton(title: "Edit Request",
+                                    width: 160,
+                                    onPress: {
+                            appViewModel.educatorPacketStackNavigationPath.append(.editPacket)
+                        })
+                    }
                 }
+                .frame(minWidth: 0,
+                       maxWidth: .infinity,
+                       alignment: .center)
             }
-            .frame(minWidth: 0,
-                   maxWidth: .infinity,
-                   alignment: .center)
         }
         .frame(minWidth: 0,
                maxWidth: .infinity,

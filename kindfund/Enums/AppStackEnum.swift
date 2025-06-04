@@ -49,20 +49,18 @@ enum EducatorNotificationStackScreensEnum: Hashable {}
 enum EducatorSettingsStackScreensEnum: Hashable {}
 
 enum VolunteerAppStacksEnum: Int, CaseIterable {
-    case profileStack, myPacketStack, notificationStack, settingsStack, logoutStack
+    case profileStack, packetStack, notificationStack, settingsStack
     
     var title: String {
         switch self {
         case .profileStack:
             return "Profile/Preferences"
-        case .myPacketStack:
+        case .packetStack:
             return "My Packets"
         case .notificationStack:
             return "Notifications"
         case .settingsStack:
             return "Settings"
-        case .logoutStack:
-            return "Logout"
         }
     }
     
@@ -70,14 +68,24 @@ enum VolunteerAppStacksEnum: Int, CaseIterable {
         switch self {
         case .profileStack:
             return .profileDrawer
-        case .myPacketStack:
+        case .packetStack:
             return .packetDrawer
         case .notificationStack:
             return .notificationDrawer
         case .settingsStack:
             return .settingsDrawer
-        case .logoutStack:
-            return .logoutDrawer
         }
     }
 }
+
+enum VolunteerProfileStackScreensEnum: Hashable {
+    case editProfile
+}
+
+enum VolunteerPacketStackScreensEnum: Hashable {
+    case packetDetails
+}
+
+enum VolunteerNotificationStackScreensEnum: Hashable {}
+
+enum VolunteerSettingsStackScreensEnum: Hashable {}
