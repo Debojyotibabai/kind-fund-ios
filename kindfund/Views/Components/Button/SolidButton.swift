@@ -7,18 +7,20 @@ struct SolidButton: View {
     let width: CGFloat
     var height: CGFloat = 40
     var onPress: () -> Void = {}
+    var isDisabled: Bool = false
+    var isLoading: Bool = false
     
     var body: some View {
         Button {
-            onPress()
+            isDisabled || isLoading ? nil : onPress()
         } label: {
-            Text(title)
+            Text(isLoading ? "Loading..." : title)
                 .font(.custom(Fonts.semiBold, size: 16))
                 .foregroundStyle(foregroundColor)
                 .frame(width: width,
                        height: height,
                        alignment: .center)
-                .background(backgroundColor)
+                .background(isDisabled ? .textInputPlaceholder : backgroundColor)
                 .clipShape(RoundedRectangle(cornerRadius: 5))
         }
     }

@@ -4,11 +4,14 @@ struct AuthCheckView: View {
     @StateObject var authViewModel: AuthViewModel = AuthViewModel()
     @StateObject var appViewModel: AppViewModel = AppViewModel()
     
+    @StateObject var signupViewModel: SignupViewModel = SignupViewModel()
+    
     var body: some View {
         if(!authViewModel.isLoggedIn) {
             UserSelectionView()
                 .environmentObject(authViewModel)
                 .environmentObject(appViewModel)
+                .environmentObject(signupViewModel)
         } else if(authViewModel.isLoggedIn &&
                   authViewModel.userType == .educator) {
             EducatorAppMainStack()
